@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certificates – Nagham Elsorady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --bg2: #f8e5ca; --bg3: #f1c79f; --card: #fffdfb;
+      --border: #ead2b4; --border2: #d7aa7e;
+      --accent: #d96b5f; --accent2: #557cc8; --accent3: #e99a58; --accent4: #c8794f;
+      --text: #4a3028; --text2: #69483b; --muted: #94715c;
+      --shadow-sm: 0 1px 3px rgba(74,48,40,.07), 0 1px 2px rgba(74,48,40,.04);
+      --shadow-md: 0 4px 16px rgba(74,48,40,.10), 0 2px 6px rgba(74,48,40,.05);
+      --shadow-lg: 0 12px 40px rgba(217,107,95,.16), 0 4px 12px rgba(74,48,40,.08);
+      --shadow-hover: 0 16px 48px rgba(217,107,95,.22), 0 6px 16px rgba(74,48,40,.08);
+      --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 24px;
+    }
+    html { font-size: 99%; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; font-size: 15px; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(18px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem; height: 62px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 1px 12px rgba(217,107,95,.10);
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      text-decoration: none; color: var(--muted); font-size: .88rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .back-btn:hover { color: var(--accent); }
+    .logo-link { text-decoration: none; display: flex; align-items: center; gap: .6rem; }
+    .logo-mark {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      color: #fff; font-weight: 900; font-size: .82rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 10px rgba(217,107,95,.3);
+    }
+    .logo-name { font-size: .95rem; font-weight: 700; color: var(--text); }
+    .logo-name em { font-style: normal; background: linear-gradient(135deg, var(--accent), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(160deg, #fffaf2 0%, #fffdf9 55%, #fff4e7 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 2.5rem 4rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px; opacity: .3;
+    }
+    .page-hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: .7rem;
+      background: linear-gradient(135deg, var(--text) 30%, var(--accent) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-hero p { color: var(--muted); font-size: .98rem; margin-bottom: 2rem; }
+    .cert-count {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: #fff; border: 1px solid var(--border); border-radius: 50px;
+      padding: .35rem 1.1rem; font-size: .82rem; color: var(--accent); font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display: flex; align-items: center; justify-content: center;
+      gap: .5rem; flex-wrap: wrap;
+      max-width: 900px; margin: 2.5rem auto 0; padding: 0 2rem;
+    }
+    .filter-btn {
+      padding: .38rem 1rem; border-radius: 50px;
+      border: 1px solid var(--border); background: #fff;
+      font-size: .8rem; font-weight: 600; color: var(--muted);
+      cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+      box-shadow: 0 3px 10px rgba(217,107,95,.3);
+    }
+
+    /* ── GRID ── */
+    .certs-section { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ── CERT CARD ── */
+    .cert-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); overflow: hidden;
+      box-shadow: var(--shadow-sm); transition: all .28s;
+      display: flex; flex-direction: column;
+    }
+    .cert-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(217,107,95,.3);
+    }
+
+    /* thumbnail */
+    .cert-thumb {
+      position: relative; aspect-ratio: 16/10;
+      overflow: hidden; background: var(--bg2); cursor: pointer;
+    }
+    .cert-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+    .cert-card:hover .cert-thumb img { transform: scale(1.04); }
+    .cert-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(74,48,40,.5) 0%, transparent 50%);
+      opacity: 0; transition: opacity .28s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cert-card:hover .cert-thumb-overlay { opacity: 1; }
+    .cert-thumb-overlay i { color: #fff; font-size: 2rem; filter: drop-shadow(0 2px 8px rgba(0,0,0,.4)); }
+
+    /* placeholder thumb */
+    .cert-thumb-placeholder {
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, var(--bg2), var(--bg3, #e2e7f5));
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .6rem; color: var(--muted);
+    }
+    .cert-thumb-placeholder i { font-size: 2.2rem; opacity: .3; }
+    .cert-thumb-placeholder span { font-size: .78rem; font-weight: 500; opacity: .5; }
+
+    /* issuer badge */
+    .cert-issuer-badge {
+      position: absolute; top: .75rem; left: .75rem;
+      padding: .22rem .7rem; border-radius: 50px;
+      font-size: .7rem; font-weight: 700;
+      backdrop-filter: blur(8px);
+    }
+    .badge-depi    { background: rgba(0,120,212,.9);  color: #fff; }
+    .badge-sef     { background: rgba(255,107,53,.9); color: #fff; }
+    .badge-huawei  { background: rgba(207,10,44,.9);  color: #fff; }
+    .badge-cisco   { background: rgba(27,160,215,.9); color: #fff; }
+    .badge-gdg     { background: rgba(66,133,244,.9); color: #fff; }
+
+    /* card body */
+    .cert-body { padding: 1.2rem 1.4rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+    .cert-name { font-weight: 700; font-size: .97rem; color: var(--text); line-height: 1.4; margin-bottom: .5rem; }
+    .cert-meta {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .78rem; color: var(--muted); margin-bottom: 1rem; flex-wrap: wrap;
+    }
+    .cert-meta-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border2); }
+    .cert-actions { margin-top: auto; display: flex; gap: .6rem; }
+    .cert-btn {
+      flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+      padding: .45rem .8rem; border-radius: var(--r-sm);
+      font-size: .78rem; font-weight: 600; cursor: pointer;
+      text-decoration: none; transition: all .22s; border: 1px solid var(--border);
+      background: var(--bg2); color: var(--text2); font-family: 'Inter', sans-serif;
+    }
+    .cert-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(217,107,95,.08); }
+    .cert-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 3px 10px rgba(217,107,95,.25); }
+    .cert-btn.primary:hover { background: #b9544f; box-shadow: 0 6px 18px rgba(217,107,95,.35); transform: translateY(-1px); }
+    .cert-btn:disabled, .cert-btn.disabled { opacity: .4; cursor: not-allowed; pointer-events: none; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(10,12,30,.93);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: var(--r-md); box-shadow: 0 30px 80px rgba(0,0,0,.5); object-fit: contain; }
+    .lb-close {
+      position: fixed; top: 1.2rem; right: 1.5rem;
+      color: #fff; cursor: pointer; background: rgba(255,255,255,.12); border: none;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+      transition: background .2s;
+    }
+    .lb-close:hover { background: rgba(255,255,255,.25); }
+    .lb-info {
+      position: fixed; bottom: 1.8rem; left: 50%; transform: translateX(-50%);
+      background: rgba(255,255,255,.1); backdrop-filter: blur(8px);
+      border-radius: 50px; padding: .5rem 1.4rem;
+      color: #fff; font-size: .83rem; font-weight: 500;
+      text-align: center; white-space: nowrap;
+    }
+
+    /* ── FOOTER ── */
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .82rem; background: var(--bg2); }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width: 640px) {
+      .certs-grid { grid-template-columns: 1fr; }
+      .topbar { padding: 0 1.2rem; }
+      .page-hero { padding: 4rem 1.5rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left fa-sm"></i> Back to Portfolio</a>
+  <a href="index.html" class="logo-link">
+    <div class="logo-mark">NE</div>
+    <span class="logo-name">Nagham <em>Elsorady</em></span>
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <h1>Certificates</h1>
+    <p>Professional certifications and completed courses from leading technology organizations.</p>
+    <span class="cert-count"><i class="fa-solid fa-certificate fa-sm"></i> 5 Certificates</span>
+  </div>
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCerts('all', this)">All</button>
+    <button class="filter-btn" onclick="filterCerts('depi', this)">DEPI</button>
+    <button class="filter-btn" onclick="filterCerts('sef', this)">SEF Academy</button>
+    <button class="filter-btn" onclick="filterCerts('huawei', this)">Huawei</button>
+    <button class="filter-btn" onclick="filterCerts('cisco', this)">Cisco</button>
+    <button class="filter-btn" onclick="filterCerts('gdg', this)">GDG</button>
+  </div>
+</div>
+
+<!-- CERTIFICATES GRID -->
+<div class="certs-section">
+  <div class="certs-grid">
+
+    <!-- 1. DEPI - Full Stack .Net -->
+    <div class="cert-card" data-issuer="depi" id="cert-depi">
+      <div class="cert-thumb-placeholder">
+        <i class="fa-solid fa-certificate"></i>
+        <span>In progress – certificate pending</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-name">Full Stack .Net Web Development</div>
+        <div class="cert-meta">
+          <span>Digital Egypt Pioneers Initiative (DEPI)</span>
+          <span class="cert-meta-dot"></span>
+          <span>Jul 2026 – Present</span>
+        </div>
+        <div class="cert-actions">
+          <button class="cert-btn disabled" disabled><i class="fa-solid fa-hourglass-half fa-sm"></i> In Progress</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SEF Academy - Front-End Development -->
+    <div class="cert-card" data-issuer="sef" id="cert-frontend">
+      <div class="cert-thumb" onclick="openLightbox('images/certificates/FrontEnd.jpeg', 'Front-End Development – SEF Academy')">
+        <img src="images/certificates/FrontEnd.jpeg" alt="Front-End Development – SEF Academy" loading="lazy"/>
+        <div class="cert-thumb-overlay"><i class="fa-solid fa-expand"></i></div>
+        <span class="cert-issuer-badge badge-sef">SEF Academy</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-name">Front-End Development</div>
+        <div class="cert-meta">
+          <span>SEF Academy</span>
+          <span class="cert-meta-dot"></span>
+          <span>Oct 2025 – Jul 2026</span>
+        </div>
+        <div class="cert-actions">
+          <button class="cert-btn primary" onclick="openLightbox('images/certificates/FrontEnd.jpeg', 'Front-End Development – SEF Academy')"><i class="fa-solid fa-expand fa-sm"></i> View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Huawei - HCIA-AI -->
+    <div class="cert-card" data-issuer="huawei" id="cert-huawei">
+      <div class="cert-thumb" onclick="openLightbox('images/certificates/photo.png', 'HCIA-AI V3.5')">
+        <img src="images/certificates/photo.png" alt="HCIA-AI V3.5" loading="lazy"/>
+        <div class="cert-thumb-overlay"><i class="fa-solid fa-expand"></i></div>
+        <span class="cert-issuer-badge badge-huawei">Huawei</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-name">HCIA-AI V3.5</div>
+        <div class="cert-meta">
+          <span>Huawei Talent</span>
+          <span class="cert-meta-dot"></span>
+          <span>August 2025</span>
+        </div>
+        <div class="cert-actions">
+          <button class="cert-btn primary" onclick="openLightbox('images/certificates/photo.png', 'HCIA-AI V3.5')"><i class="fa-solid fa-expand fa-sm"></i> View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Cisco - English for IT -->
+    <div class="cert-card" data-issuer="cisco" id="cert-english">
+      <div class="cert-thumb" onclick="openLightbox('images/certificates/English for IT.png', 'English for IT 1 & 2')">
+        <img src="images/certificates/English for IT.png" alt="English for IT 1 & 2" loading="lazy"/>
+        <div class="cert-thumb-overlay"><i class="fa-solid fa-expand"></i></div>
+        <span class="cert-issuer-badge badge-cisco">Cisco</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-name">English for IT 1 &amp; 2</div>
+        <div class="cert-meta">
+          <span>Cisco Networking Academy</span>
+          <span class="cert-meta-dot"></span>
+          <span>May 2025</span>
+        </div>
+        <div class="cert-actions">
+          <button class="cert-btn primary" onclick="openLightbox('images/certificates/English for IT.png', 'English for IT 1 & 2')"><i class="fa-solid fa-expand fa-sm"></i> View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Google Developer Groups - Certificate of Recognition -->
+    <div class="cert-card" data-issuer="gdg" id="cert-gdg">
+      <div class="cert-thumb" onclick="openLightbox('images/certificates/GDG Certificte.png', 'Certificate of Recognition – Google Developer Groups')">
+        <img src="images/certificates/GDG Certificte.png" alt="Certificate of Recognition – Google Developer Groups" loading="lazy"/>
+        <div class="cert-thumb-overlay"><i class="fa-solid fa-expand"></i></div>
+        <span class="cert-issuer-badge badge-gdg">GDG</span>
+      </div>
+      <div class="cert-body">
+        <div class="cert-name">Google Developer Groups</div>
+        <div class="cert-meta">
+          <span>Google Developer Groups</span>
+          <span class="cert-meta-dot"></span>
+          <span>July 1, 2026</span>
+        </div>
+        <div class="cert-actions">
+          <button class="cert-btn primary" onclick="openLightbox('images/certificates/GDG Certificte.png', 'Certificate of Recognition – Google Developer Groups')"><i class="fa-solid fa-expand fa-sm"></i> View Details</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+  <button class="lb-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+  <img id="lb-img" src="" alt=""/>
+  <div class="lb-info" id="lb-info"></div>
+</div>
+
+<footer>
+  <p>Part of <a href="index.html">Nagham Elsorady's Portfolio</a> &nbsp;·&nbsp; 2026</p>
+</footer>
+
+<script>
+  /* ── Lightbox ── */
+  function openLightbox(src, name) {
+    document.getElementById('lb-img').src = src;
+    document.getElementById('lb-info').textContent = name;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeLightboxBg(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  /* ── Highlight on anchor ── */
+  window.addEventListener('load', () => {
+    const hash = window.location.hash;
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.style.transition = 'box-shadow .3s, border-color .3s';
+          el.style.boxShadow = '0 0 0 3px rgba(217,107,95,.4)';
+          el.style.borderColor = 'var(--accent)';
+          setTimeout(() => { el.style.boxShadow = ''; el.style.borderColor = ''; }, 2000);
+        }, 300);
+      }
+    }
+  });
+  function filterCerts(issuer, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.cert-card').forEach(card => {
+      const show = issuer === 'all' || card.dataset.issuer === issuer;
+      card.style.display = show ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

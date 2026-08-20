@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects – Nagham Elsorady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:     #ffffff; --bg2: #f8e5ca; --card: #fffdfb;
+      --border: #ead2b4; --border2: #d7aa7e;
+      --accent: #d96b5f; --accent2: #557cc8; --accent3: #e99a58; --accent4: #c8794f;
+      --text:   #4a3028; --text2: #69483b; --muted:  #94715c;
+      --shadow-sm: 0 1px 3px rgba(74,48,40,.07),0 1px 2px rgba(74,48,40,.04);
+      --shadow-md: 0 4px 16px rgba(74,48,40,.10),0 2px 6px rgba(74,48,40,.05);
+      --shadow-lg: 0 12px 40px rgba(217,107,95,.16),0 4px 12px rgba(74,48,40,.08);
+      --r-sm:8px; --r-md:12px; --r-lg:18px; --r-xl:24px;
+    }
+    html { font-size: 99%; scroll-behavior: smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; overflow-x:hidden; font-size:15px; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky; top:0; z-index:200;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(18px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem; height: 62px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 1px 12px rgba(217,107,95,.10);
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap:.5rem;
+      text-decoration:none; color:var(--muted); font-size:.88rem; font-weight:500;
+      transition: color .2s;
+    }
+    .back-btn:hover { color:var(--accent); }
+    .logo-link { text-decoration:none; display:flex; align-items:center; gap:.6rem; }
+    .logo-mark {
+      width:34px; height:34px; border-radius:9px;
+      background: linear-gradient(135deg,var(--accent),var(--accent3));
+      color:#fff; font-weight:900; font-size:.82rem;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 3px 10px rgba(217,107,95,.3);
+    }
+    .logo-name { font-size:.95rem; font-weight:700; color:var(--text); }
+    .logo-name em { font-style:normal; background:linear-gradient(135deg,var(--accent),var(--accent3)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(160deg,#fffaf2 0%,#fffdf9 55%,#fff4e7 100%);
+      border-bottom:1px solid var(--border);
+      padding: 5rem 2.5rem 4rem; text-align:center;
+      position:relative; overflow:hidden;
+    }
+    .page-hero::before {
+      content:''; position:absolute; inset:0;
+      background-image: linear-gradient(var(--border) 1px,transparent 1px), linear-gradient(90deg,var(--border) 1px,transparent 1px);
+      background-size:48px 48px; opacity:.3;
+    }
+    .page-hero-inner { position:relative; z-index:1; max-width:680px; margin:0 auto; }
+    .page-hero h1 {
+      font-size:clamp(2rem,5vw,3rem); font-weight:800; letter-spacing:-.03em; margin-bottom:.7rem;
+      background:linear-gradient(135deg,var(--text) 30%,var(--accent) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .page-hero p { color:var(--muted); font-size:.98rem; margin-bottom:2rem; }
+    .projects-count {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:#fff; border:1px solid var(--border); border-radius:50px;
+      padding:.35rem 1.1rem; font-size:.82rem; color:var(--accent); font-weight:600;
+      box-shadow:var(--shadow-sm);
+    }
+
+    /* ── SIDE NAV ── */
+    .layout { display:flex; max-width:1200px; margin:0 auto; padding:3rem 2rem 6rem; gap:2.5rem; }
+    .side-nav {
+      width:220px; flex-shrink:0;
+      position:sticky; top:80px; align-self:flex-start;
+      height:fit-content;
+    }
+    .side-nav-title { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:.8rem; padding-left:.6rem; }
+    .side-nav ul { list-style:none; display:flex; flex-direction:column; gap:.2rem; }
+    .side-nav a {
+      display:flex; align-items:center; gap:.6rem;
+      padding:.5rem .7rem; border-radius:var(--r-sm);
+      font-size:.83rem; color:var(--text2); text-decoration:none; font-weight:500;
+      transition:all .2s; border-left:2px solid transparent;
+    }
+    .side-nav a:hover, .side-nav a.active {
+      background:rgba(217,107,95,.08); color:var(--accent);
+      border-left-color:var(--accent);
+    }
+    .side-nav a i { width:16px; text-align:center; opacity:.7; }
+    .side-nav-sep { height:1px; background:var(--border); margin:.6rem 0; }
+
+    /* ── MAIN CONTENT ── */
+    .projects-main { flex:1; min-width:0; display:flex; flex-direction:column; gap:4rem; }
+
+    /* ── PROJECT SECTION ── */
+    .project-section {
+      border-radius:var(--r-xl); background:var(--card);
+      border:1px solid var(--border); box-shadow:var(--shadow-md);
+      overflow:hidden; scroll-margin-top:88px;
+    }
+    .project-section-header {
+      padding:1.8rem 2rem 1.5rem;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+      background: linear-gradient(135deg, rgba(217,107,95,.05) 0%, rgba(233,154,88,.04) 100%);
+    }
+    .ps-left { display:flex; align-items:flex-start; gap:1.1rem; }
+    .ps-icon {
+      width:48px; height:48px; border-radius:var(--r-md); flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+      box-shadow:0 4px 12px rgba(0,0,0,.1);
+    }
+    .ps-icon.data     { background:linear-gradient(135deg,#f7d8cf,#fbece6); color:#bd554d; }
+    .ps-icon.software { background:linear-gradient(135deg,#f8dfbd,#fff1dd); color:#c8783f; }
+    .ps-icon.iot      { background:linear-gradient(135deg,#dbe5f7,#eef3fc); color:#4e70b2; }
+    .ps-icon.mobile   { background:linear-gradient(135deg,#f6ddc8,#fff0df); color:#b96945; }
+    .ps-cat { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#9f584d; margin-bottom:.2rem; }
+    .ps-name { font-size:1.15rem; font-weight:800; color:#49312b; letter-spacing:-.01em; }
+    .ps-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.7rem; }
+    .ps-tag {
+      background:#f6f0eb; border:1px solid #e4d5cb;
+      border-radius:var(--r-sm); padding:.18rem .65rem;
+      font-size:.73rem; color:#5e6f9c; font-weight:600; font-family:'Fira Code',monospace;
+    }
+
+    /* ── PROJECT BODY ── */
+    .project-body { padding:1.8rem 2rem; }
+    .project-desc-full { color:#795b50; font-size:.93rem; line-height:1.85; margin-bottom:1.5rem; }
+
+    /* ── SCREENSHOTS ── */
+    .screenshots-title {
+      font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em;
+      color:var(--accent); margin-bottom:1rem; display:flex; align-items:center; gap:.5rem;
+    }
+    .screenshots-title::after { content:''; flex:1; height:1px; background:var(--border); }
+    .gallery-grid {
+      display:grid; gap:1rem;
+      grid-template-columns: repeat(auto-fill, minmax(380px,1fr));
+    }
+    .gallery-grid.single { grid-template-columns:1fr; }
+    .gallery-item {
+      border-radius:var(--r-lg); overflow:hidden; cursor:pointer;
+      border:1px solid var(--border); background:#fffaf2;
+      transition:transform .28s, box-shadow .28s; position:relative;
+      aspect-ratio:16/10;
+    }
+    .gallery-item:hover { transform:translateY(-3px) scale(1.005); box-shadow:var(--shadow-lg); }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+    .gallery-item:hover img { transform:scale(1.04); }
+    .gallery-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top,rgba(15,23,42,.5) 0%,transparent 55%);
+      opacity:0; transition:opacity .28s;
+      display:flex; align-items:flex-end; padding:1rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity:1; }
+    .gallery-overlay span { color:#fff; font-size:.8rem; font-weight:600; display:flex; align-items:center; gap:.4rem; }
+
+    /* ── NO IMAGES placeholder ── */
+    .no-screenshots {
+      background:var(--bg2); border:1px dashed var(--border2); border-radius:var(--r-lg);
+      padding:2rem; text-align:center; color:var(--muted); font-size:.88rem;
+    }
+    .no-screenshots i { font-size:2rem; margin-bottom:.6rem; opacity:.35; display:block; }
+
+    /* ── CATEGORY DIVIDER ── */
+    .category-divider {
+      display:flex; align-items:center; gap:1rem;
+      font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em;
+    }
+    .category-divider span { white-space:nowrap; }
+    .category-divider::before, .category-divider::after { content:''; flex:1; height:2px; border-radius:2px; }
+    .category-divider.data-cat    { color:var(--accent); }
+    .category-divider.data-cat::before, .category-divider.data-cat::after { background:linear-gradient(90deg,rgba(59,91,219,.3),transparent); }
+    .category-divider.software-cat { color:var(--accent3); }
+    .category-divider.software-cat::before, .category-divider.software-cat::after { background:linear-gradient(90deg,rgba(112,72,232,.3),transparent); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position:fixed; inset:0; z-index:9999;
+      background:rgba(10,12,30,.93);
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; pointer-events:none; transition:opacity .25s;
+      backdrop-filter:blur(8px);
+    }
+    .lightbox.open { opacity:1; pointer-events:all; }
+    .lightbox img { max-width:92vw; max-height:90vh; border-radius:var(--r-md); box-shadow:0 30px 80px rgba(0,0,0,.5); object-fit:contain; }
+    .lb-close {
+      position:fixed; top:1.2rem; right:1.5rem;
+      color:#fff; font-size:1.4rem; cursor:pointer;
+      background:rgba(255,255,255,.12); border:none;
+      width:42px; height:42px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:background .2s;
+    }
+    .lb-close:hover { background:rgba(255,255,255,.25); }
+    .lb-arrow {
+      position:fixed; top:50%; transform:translateY(-50%);
+      color:#fff; font-size:1.3rem; cursor:pointer;
+      background:rgba(255,255,255,.12); border:none;
+      width:48px; height:48px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:background .2s;
+    }
+    .lb-arrow:hover { background:rgba(255,255,255,.25); }
+    .lb-prev { left:1.3rem; } .lb-next { right:1.3rem; }
+    .lb-counter { position:fixed; bottom:1.4rem; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.65); font-size:.82rem; font-weight:500; }
+
+    /* ── FOOTER ── */
+    footer { text-align:center; padding:2rem; border-top:1px solid var(--border); color:var(--muted); font-size:.82rem; background:var(--bg2); }
+    footer a { color:var(--accent); text-decoration:none; font-weight:600; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:800px) {
+      .layout { flex-direction:column; padding:2rem 1.2rem 4rem; }
+      .side-nav { width:100%; position:static; }
+      .side-nav ul { flex-direction:row; flex-wrap:wrap; gap:.4rem; }
+      .side-nav a { border-left:none; border-bottom:2px solid transparent; }
+      .side-nav a:hover, .side-nav a.active { border-bottom-color:var(--accent); border-left-color:transparent; }
+      .gallery-grid { grid-template-columns:1fr; }
+      .topbar { padding:0 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left fa-sm"></i> Back to Portfolio</a>
+  <a href="index.html" class="logo-link">
+    <div class="logo-mark">NE</div>
+    <span class="logo-name">Nagham <em>Elsorady</em></span>
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <h1>All Projects</h1>
+    <p>A showcase of my front-end web development projects.</p>
+    <span class="projects-count"><i class="fa-solid fa-layer-group fa-sm"></i> 2 Projects</span>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDE NAV -->
+  <nav class="side-nav">
+    <div class="side-nav-title">Jump to project</div>
+    <ul>
+      <li><a href="#signaryai"><i class="fa-solid fa-signature"></i> SignaryAI Website</a></li>
+      <li><a href="#charity"><i class="fa-solid fa-hand-holding-heart"></i> Charity Website</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="projects-main">
+
+    <!-- ── FRONT-END ── -->
+    <div class="category-divider software-cat">
+      <span><i class="fa-solid fa-laptop-code fa-sm"></i> &nbsp;Front-End</span>
+    </div>
+
+    <!-- 1. SignaryAI Website -->
+    <div class="project-section" id="signaryai">
+      <div class="project-section-header">
+        <div class="ps-left">
+          <div class="ps-icon software"><i class="fa-solid fa-signature"></i></div>
+          <div>
+            <div class="ps-cat">HTML · CSS</div>
+            <div class="ps-name">SignaryAI Website</div>
+            <div class="ps-tags">
+              <span class="ps-tag">HTML</span>
+              <span class="ps-tag">CSS</span>
+              <span class="ps-tag">UI Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc-full">
+          Built a clean, user-centric interface from scratch using <strong>HTML and CSS</strong>, prioritising layout design and clear call-to-action (CTA) paths to drive user engagement.
+        </p>
+        <div class="screenshots-title"><i class="fa-solid fa-link fa-sm"></i> Links</div>
+        <p class="project-desc-full" style="margin-bottom:0;">
+          <a href="https://github.com/nagham959/SignaryAI-Demo" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;"><i class="fa-brands fa-github"></i> GitHub</a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+          <a href="https://nagham959.github.io/SignaryAI-Demo/" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. Charity Website -->
+    <div class="project-section" id="charity">
+      <div class="project-section-header">
+        <div class="ps-left">
+          <div class="ps-icon software"><i class="fa-solid fa-hand-holding-heart"></i></div>
+          <div>
+            <div class="ps-cat">HTML5 · CSS3</div>
+            <div class="ps-name">Charity Website</div>
+            <div class="ps-tags">
+              <span class="ps-tag">HTML5</span>
+              <span class="ps-tag">CSS3</span>
+              <span class="ps-tag">Accessibility</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc-full">
+          Created a charity website using <strong>semantic HTML5</strong> to meet web accessibility standards, styled with <strong>CSS3</strong> without relying on an external framework such as Bootstrap.
+        </p>
+        <div class="screenshots-title"><i class="fa-solid fa-link fa-sm"></i> Links</div>
+        <p class="project-desc-full" style="margin-bottom:0;">
+          <a href="https://github.com/nagham959/HTML-CSS-Demo" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;"><i class="fa-brands fa-github"></i> GitHub</a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+          <a href="https://nagham959.github.io/HTML-CSS-Demo/" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+        </p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+  <button class="lb-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+  <button class="lb-arrow lb-prev" onclick="changeImg(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+  <img id="lb-img" src="" alt=""/>
+  <button class="lb-arrow lb-next" onclick="changeImg(1)"><i class="fa-solid fa-chevron-right"></i></button>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<footer>
+  <p>Part of <a href="index.html">Nagham Elsorady's Portfolio</a> &nbsp;·&nbsp; 2026</p>
+</footer>
+
+<script>
+  let lbImages = [], lbIndex = 0;
+
+  function openLightbox(imgs, idx) {
+    lbImages = imgs; lbIndex = idx;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeLightboxBg(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
+  function changeImg(dir) { lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length; updateLightbox(); }
+  function updateLightbox() {
+    document.getElementById('lb-img').src = lbImages[lbIndex];
+    const counter = document.getElementById('lb-counter');
+    counter.textContent = lbImages.length > 1 ? (lbIndex+1) + ' / ' + lbImages.length : '';
+  }
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeImg(-1);
+    if (e.key === 'ArrowRight') changeImg(1);
+  });
+
+  // Active side nav highlight on scroll
+  const sections = document.querySelectorAll('.project-section');
+  const navLinks = document.querySelectorAll('.side-nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
