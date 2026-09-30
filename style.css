@@ -520,6 +520,47 @@ h2 { font-size: 1.55rem; font-weight: 800; letter-spacing: -.03em; color: var(--
 }
 
 /* ────────────────────────────
+   SERVICES
+──────────────────────────── */
+.services-intro {
+  max-width: 650px; color: var(--muted); font-size: .95rem;
+  line-height: 1.75; margin: -1.5rem 0 2rem;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.service-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 1.5rem 1.3rem;
+  box-shadow: var(--shadow-sm); transition: all .25s;
+  position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+}
+.service-card:hover {
+  border-color: rgba(217,107,95,.45); transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.service-icon {
+  width: 42px; height: 42px; border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #f8dfbd, #fff1dd);
+  color: var(--accent4); font-size: 1.05rem; margin-bottom: 1rem;
+}
+.service-card h3 { font-size: .98rem; color: var(--text); margin-bottom: .5rem; }
+.service-card p { color: var(--muted); font-size: .82rem; line-height: 1.7; }
+.service-tools { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
+.service-tools span {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r-sm); padding: .15rem .5rem;
+  color: var(--text2); font-size: .68rem; font-weight: 600;
+}
+
+/* ────────────────────────────
    PROJECTS
 ──────────────────────────── */
 .projects-grid {
@@ -710,6 +751,7 @@ footer strong { color: var(--accent); font-weight: 700; }
   .about-grid { grid-template-columns: 1fr; }
   .about-highlights { grid-template-columns: repeat(4, 1fr); }
   .projects-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ────────────────────────────
@@ -758,6 +800,9 @@ footer strong { color: var(--accent); font-weight: 700; }
 
   /* PROJECTS */
   .projects-grid { grid-template-columns: 1fr; }
+
+  /* SERVICES */
+  .services-grid { grid-template-columns: 1fr; }
 
   /* COURSES */
   .courses-grid { grid-template-columns: 1fr; }
